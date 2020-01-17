@@ -51,6 +51,10 @@ class App extends Component {
       }));
   }
 
+  guessLetter = () => {
+    alert('you just guessed a letter!');
+  }
+
   render() {
 
     return (
@@ -58,14 +62,16 @@ class App extends Component {
         <h1>Hangman</h1>
         <img src={this.state.img} alt="img" />
         <button onClick={()=>{this.imgSwitch()}}>click me</button>
-        {this.state.words.map(word => (
-          <Word key={word.wordId} word={word} />
-        ))}
         <div className='container'>
           {this.state.letters.map((char, index) => (
-            <Letter key={index} char={char} />
+            <div onClick={(char)=>this.guessLetter()}>
+              <Letter key={index} char={char}  />
+            </div>
           ))}
         </div>
+        {/* {this.state.words.map(word => (
+          <Word key={word.wordId} word={word} />
+        ))} */}
       </div>
     );
   }
