@@ -1,0 +1,12 @@
+insert into word (word_id, name, definition, difficulty) values (1, 'Integrity', 'the quality of being honest and having strong moral principles; moral uprightness.', 1);
+insert into word (word_id, name, definition, difficulty) values (2, 'Autonomy', 'the right or condition of self-government.', 1);
+insert into word (word_id, name, definition, difficulty) values (3, 'Strategy', 'a plan of action or policy designed to achieve a major or overall aim.', 1);
+insert into word (word_id, name, definition, difficulty) values (4, 'Innovation', 'the action or process of innovating.', 1);
+insert into word (word_id, name, definition, difficulty) values (5, 'Planning', 'the process of making plans for something.', 1);
+insert into word (word_id, name, definition, difficulty) values (6, 'Emerging', 'becoming apparent or prominent.', 1);
+insert into word (word_id, name, definition, difficulty) values (7, 'Technology', 'the application of scientific knowledge for practical purposes, especially in industry.', 1);
+insert into word (word_id, name, definition, difficulty) values (8, 'Tsunami', 'a long high sea wave caused by an earthquake, submarine landslide, or other disturbance.', 1);
+insert into word (word_id, name, definition, difficulty) values (9, 'Dependency', 'a dependent or subordinate thing, especially a country or province controlled by another.', 1);
+insert into word (word_id, name, definition, difficulty) values (10, 'Injection', 'an instance of injecting or being injected.', 1);
+insert into word (word_id, name, definition, difficulty) values (11, 'Component', 'a part or element of a larger whole, especially a part of a machine or vehicle.', 1);
+insert into word (word_id, name, definition, difficulty) values (12, 'Fragment', 'a small part broken or separated off something.', 1);
