@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Word from './Words/Word';
 import {getAllWords} from './client';
+import Letter from './Letters/Letter';
 import img1 from './img/hangman1.png';
 import img2 from './img/hangman2.png';
 import img3 from './img/hangman3.png';
@@ -23,11 +24,10 @@ class App extends Component {
     imgs: [img1,img2,img3,img4,img5,img6,img7],
     img: img1,
     words: [],
-    word: {
-      name: 'myWord',
-      description: 'some description',
-      difficulty: 3
-    }
+    letters: [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W', 'X', 'Y', 'Z'
+    ]
   }
 
   imgSwitch(){
@@ -61,6 +61,11 @@ class App extends Component {
         {this.state.words.map(word => (
           <Word key={word.wordId} word={word} />
         ))}
+        <div className='container'>
+          {this.state.letters.map((char, index) => (
+            <Letter key={index} char={char} />
+          ))}
+        </div>
       </div>
     );
   }
