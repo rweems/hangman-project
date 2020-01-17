@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import './App.css';
 import Word from './Words/Word';
 import {getAllWords} from './client';
+import Letter from './Letters/Letter';
 
 class App extends Component {
 
   state = {
     words: [],
-    word: {
-      name: 'myWord',
-      description: 'some description',
-      difficulty: 3
-    }
+    letters: [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W', 'X', 'Y', 'Z'
+    ]
   }
 
   componentDidMount() {
@@ -37,6 +37,11 @@ class App extends Component {
         {this.state.words.map(word => (
           <Word key={word.wordId} word={word} />
         ))}
+        <div className='container'>
+          {this.state.letters.map((char, index) => (
+            <Letter key={index} char={char} />
+          ))}
+        </div>
       </div>
     );
   }
