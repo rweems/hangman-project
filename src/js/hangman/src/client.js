@@ -1,10 +1,10 @@
 import fetch from 'unfetch';
 
 export const getAllWords = () => 
-    fetch('/words');
+    fetch('http://localhost:8080/words');
 
 export const addNewWord = word => 
-    fetch('/words', {
+    fetch('http://localhost:8080/words', {
         headers: {
             'Content-Type': 'application/json'
         }, 
