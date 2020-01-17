@@ -1,5 +1,5 @@
 import React from 'react';
-import './Word.css';
+import './HangMan.css';
 
 const word = (props) => {
     return (
