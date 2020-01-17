@@ -4,8 +4,8 @@ import './Word.css';
 const word = (props) => {
     return (
         <div className='Word'>
-            <h1>{props.word.name}</h1>
-            <h4>{props.word.description}</h4>
+            <h3>{props.word.name}</h3>
+            <p>{props.word.definition}</p>
             <p>Difficulty: {props.word.difficulty}</p>
         </div>
     );
