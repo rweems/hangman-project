@@ -56,8 +56,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hangman</h1>
-        <button onClick={()=>{this.imgSwitch()}}>click me</button>
         <img src={this.state.img} alt="img" />
+        <button onClick={()=>{this.imgSwitch()}}>click me</button>
         {this.state.words.map(word => (
           <Word key={word.wordId} word={word} />
         ))}
