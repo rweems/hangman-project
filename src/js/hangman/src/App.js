@@ -13,16 +13,11 @@ import img7 from './img/hangman7.png';
 
 class App extends Component {
   i = 0;
+  
   state = {
-    // imgs: ['./img/hangman1.png',
-    //        './img/hangman2.png',
-    //        './img/hangman3.png',
-    //         './img/hangman4.png',
-    //         './img/hangman5.png',
-    //         './img/hangman6.png',
-    //         './img/hangman7.png'],
     imgs: [img1,img2,img3,img4,img5,img6,img7],
     img: img1,
+    word: null,
     words: [],
     letters: [
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
@@ -31,11 +26,11 @@ class App extends Component {
   }
 
   imgSwitch(){
-    this.i = (this.i+1)%this.state.imgs.length;
     this.setState({img:this.state.imgs[this.i]});
+    this.i = (this.i+1)%this.state.imgs.length;
   }
 
-  componentDidMount() {
+  componentDidMount(){
     this.fetchWords();
     this.imgSwitch();
   }
@@ -48,7 +43,18 @@ class App extends Component {
         this.setState({
           words
         });
+        this.chooseRandomWord();
       }));
+  }
+
+  chooseRandomWord(){
+    console.log("length is: " + this.state.words.length);
+    const rng = Math.floor(Math.random() * this.state.words.length);
+    console.log("rng: "+rng);
+    this.setState((state)=>{ 
+      return {word:state.words[rng]};
+    });
+    console.log("rng word: "+this.state.word);
   }
 
   render() {
@@ -58,6 +64,7 @@ class App extends Component {
         <h1>Hangman</h1>
         <img src={this.state.img} alt="img" />
         <button onClick={()=>{this.imgSwitch()}}>click me</button>
+        {/* <Word key={this.state.word.wordId} word={this.state.word}/> */}
         {this.state.words.map(word => (
           <Word key={word.wordId} word={word} />
         ))}
