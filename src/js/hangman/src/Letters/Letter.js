@@ -3,9 +3,13 @@ import './Letter.css';
 
 const letter = (props) => {
     return (
-        <div className='Letter'>
-            <h1>{props.char}</h1>
-        </div>
+        // <div className='Letter'>
+            <button className='Letter'>
+                <h1>
+                    {props.char}
+                </h1>
+            </button>
+        // </div>
     );
 }
 

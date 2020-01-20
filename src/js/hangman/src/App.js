@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Word from './Words/Word';
-import {getAllWords} from './client';
+import {getAllWords, getRndWord} from './client';
 import Letter from './Letters/Letter';
 import img1 from './img/hangman1.png';
 import img2 from './img/hangman2.png';
@@ -17,8 +17,10 @@ class App extends Component {
   state = {
     imgs: [img1,img2,img3,img4,img5,img6,img7],
     img: img1,
-    word: null,
-    words: [],
+    word: "",
+    letter: [],
+    answer:[],
+    guesses: [],
     letters: [
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W', 'X', 'Y', 'Z'
@@ -31,7 +33,8 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.fetchWords();
+    this.fetchWord();
+    
     this.imgSwitch();
   }
 
@@ -46,20 +49,51 @@ class App extends Component {
         this.chooseRandomWord();
       }));
   }
-
-  guessLetter = () => {
-    alert('you just guessed a letter!');
+  fetchWord = () => {
+    getRndWord()
+    .then(res => res.json()
+    .then(word => {
+      console.log(word);
+      const letter = word.name.split("");
+      const answer = [];
+      for(var i = 0; i<letter.length; i++){
+        answer.push("_");
+      }
+      this.setState({word, letter, answer});
+      
+    }));
+  }
+  guessLetter(guess){
+    console.log(guess);
+    const answer = this.state.answer;
+    var rightguess = false;
+    for(var i = 0; i<answer.length; i++){
+      if(this.state.letter[i].toUpperCase()===guess.toUpperCase()){
+        answer[i]=this.state.letter[i];
+        this.setState({answer});
+        rightguess=true;
+      }
+    }
+    if(rightguess===false){
+      this.imgSwitch();
+    }
   }
 
   chooseRandomWord(){
-    console.log("length is: " + this.state.words.length);
-    const rng = Math.floor(Math.random() * this.state.words.length);
+    console.log("length is: " + this.state.letter.length);
+    const rng = Math.floor(Math.random() * this.state.letter.length);
     console.log("rng: "+rng);
-    this.setState((state)=>{ 
-      return {word:state.words[rng]};
+    this.setState({ 
+      word:this.state.words[rng]
     });
-    console.log("rng word: "+this.state.word);
+    console.log("rng word: "+this.state.word.name);
   }
+
+  // wordToArray(){
+  //   for(var i = 0; i<this.state.word.length; i++){
+  //     <Letter key={this.state.word.charAt(i)} char={this.state.word.charAt(i)}  />
+  //   }
+  // }
 
   render() {
 
@@ -67,15 +101,23 @@ class App extends Component {
       <div className="App">
         <h1>Hangman</h1>
         <img src={this.state.img} alt="img" />
-        <button onClick={()=>{this.imgSwitch()}}>click me</button>
-        {/* <Word key={this.state.word.wordId} word={this.state.word}/> */}
-        {this.state.words.map(word => (
-          <Word key={word.wordId} word={word} />
-        ))}
+        <div>
+          <button onClick={()=>{this.imgSwitch()}}>click me</button>
+        </div>
         <div className='container'>
-          {this.state.letters.map((char, index) => (
-            <div onClick={(char)=>this.guessLetter()}>
-              <Letter key={index} char={char}  />
+          {this.state.answer.map((char, index) =>(
+            <Letter key={index} char={char}  />
+            
+          ))}
+        </div>
+        {/* <Word key={this.state.word.wordId} word={this.state.word}/> */}
+        {/* {this.state.words.map(word => (
+          <Word key={word.wordId} word={word} />
+        ))} */}
+        <div className='container'>
+          {this.state.letters.map((letter, index) => (
+            <div onClick={()=>this.guessLetter(letter)}> 
+              <Letter key={index} char={letter}  />
             </div>
           ))}
         </div>
