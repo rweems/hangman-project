@@ -3,6 +3,9 @@ import fetch from 'unfetch';
 export const getAllWords = () => 
     fetch('http://localhost:8080/words');
 
+export const getRandomWord = () =>
+    fetch('http://localhost:8080/words/random');
+
 export const addNewWord = word => 
     fetch('http://localhost:8080/words', {
         headers: {

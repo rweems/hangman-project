@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @RestController
@@ -34,5 +35,14 @@ public class WordController {
     public void addNewWord(@RequestBody Word word) {
         wordService.addNewWord(word);
     }
+
+    @GetMapping(value = "/random")
+    public Optional<Word> getRandomWord(){
+        List<Word> wordList = getAllWords();
+
+        int id = (int) (Math.random() * wordList.size()) + 1;
+         return wordService.getRandomWord(id);
+    }
+
 
 }

@@ -24,18 +24,39 @@ class App extends Component {
     letters: [
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W', 'X', 'Y', 'Z'
-    ]
+    ],
+      word: '',
+      desc: '',
+      wordLength: [],
+      isHidden: true,
+      lives: 7
   }
+
+
 
   imgSwitch(){
     this.setState({img:this.state.imgs[this.i]});
     this.i = (this.i+1)%this.state.imgs.length;
+
+    this.state.lives--;
+    console.log("lives: " + this.state.lives)
+    if(this.state.lives === 0){
+        this.gameOver();
+        setTimeout( () =>{
+            window.location.reload();
+        },2000 );
+
+    }
+  }
+
+  gameOver(){
+      alert('Oh no, he\'s gone');
   }
 
   componentDidMount(){
     this.fetchWord();
-    
     this.imgSwitch();
+
   }
 
   fetchWords = () => {
@@ -96,6 +117,10 @@ class App extends Component {
   // }
 
   render() {
+      const divStyle = {
+
+
+      };
 
     return (
       <div className="App">
