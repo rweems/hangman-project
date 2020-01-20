@@ -47,6 +47,10 @@ class App extends Component {
       }));
   }
 
+  guessLetter = () => {
+    alert('you just guessed a letter!');
+  }
+
   chooseRandomWord(){
     console.log("length is: " + this.state.words.length);
     const rng = Math.floor(Math.random() * this.state.words.length);
@@ -70,9 +74,14 @@ class App extends Component {
         ))}
         <div className='container'>
           {this.state.letters.map((char, index) => (
-            <Letter key={index} char={char} />
+            <div onClick={(char)=>this.guessLetter()}>
+              <Letter key={index} char={char}  />
+            </div>
           ))}
         </div>
+        {/* {this.state.words.map(word => (
+          <Word key={word.wordId} word={word} />
+        ))} */}
       </div>
     );
   }
