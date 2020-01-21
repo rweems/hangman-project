@@ -25,6 +25,11 @@ class App extends Component {
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V','W', 'X', 'Y', 'Z'
     ],
+    disabled: [
+      false,false,false,false,false,false,false,false,false,false,false,
+      false,false,false,false,false,false,false,false,false,false,false,
+      false,false,false,false
+    ],
       word: '',
       desc: '',
       wordLength: [],
@@ -92,23 +97,28 @@ class App extends Component {
     }));
   }
   guessLetter(guess,index){
-    console.log(guess);
+    console.log("guess: " + guess + " index: "+index);
     const answer = this.state.answer;
+    const disabled = this.state.disabled;
     var rightguess = false;
-    for(var i = 0; i<answer.length; i++){
-      if(this.state.letter[i].toUpperCase()===guess.toUpperCase()){
-        answer[i]=this.state.letter[i];
-        this.setState({answer});
-        rightguess=true;
+    if(this.state.disabled[index]===false){
+      for(var i = 0; i<answer.length; i++){
+        if(this.state.letter[i].toUpperCase()===guess.toUpperCase()){
+          answer[i]=this.state.letter[i];
+          this.setState({answer});
+          rightguess=true;
+        }
       }
+      if(rightguess===false){
+        this.imgSwitch();
+      }
+      if(!answer.includes("_")){
+        this.gameWin();
+      }
+      disabled[index]=true;
+      this.setState({disabled});
+      this.disableLetter(guess,index);
     }
-    if(rightguess===false){
-      this.imgSwitch();
-    }
-    if(!answer.includes("_")){
-      this.gameWin();
-    }
-    this.disableLetter(guess,index);
   }
 
   disableLetter(letter,index){
