@@ -53,6 +53,7 @@ class App extends Component {
       alert('Oh no, he\'s gone');
   }
 
+
   componentDidMount(){
     this.fetchWord();
     this.imgSwitch();
@@ -84,7 +85,7 @@ class App extends Component {
       
     }));
   }
-  guessLetter(guess){
+  guessLetter(guess,index){
     console.log(guess);
     const answer = this.state.answer;
     var rightguess = false;
@@ -98,7 +99,20 @@ class App extends Component {
     if(rightguess===false){
       this.imgSwitch();
     }
+    
+    this.disableLetter(guess,index);
   }
+
+  disableLetter(letter,index){
+    const idd = `id` + index;
+    const getId = document.getElementById(idd);
+    console.log(getId);
+    console.log(letter + " from disable " + index);
+    document.getElementById(idd).childNodes[0].disabled = true;
+    // console.log(document.getElementById(idd).childNodes.length);
+    
+  }
+
 
   chooseRandomWord(){
     console.log("length is: " + this.state.letter.length);
@@ -126,9 +140,9 @@ class App extends Component {
       <div className="App">
         <h1>Hangman</h1>
         <img src={this.state.img} alt="img" />
-        <div>
+        {/* <div>
           <button onClick={()=>{this.imgSwitch()}}>click me</button>
-        </div>
+        </div> */}
         <div className='container'>
           {this.state.answer.map((char, index) =>(
             <Letter key={index} char={char}  />
@@ -141,9 +155,13 @@ class App extends Component {
         ))} */}
         <div className='container'>
           {this.state.letters.map((letter, index) => (
-            <div onClick={()=>this.guessLetter(letter)}> 
-              <Letter key={index} char={letter}  />
+            
+            <div onClick={()=>this.guessLetter(letter,index)} id={`id${index}`}> 
+            
+                <Letter key={index} char={letter}  />
+              
             </div>
+            
           ))}
         </div>
         {/* {this.state.words.map(word => (
