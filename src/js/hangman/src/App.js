@@ -53,6 +53,12 @@ class App extends Component {
       alert('Oh no, he\'s gone');
   }
 
+  gameWin(){
+    alert("You Won");
+    setTimeout( () =>{
+      window.location.reload();
+  },2000 );
+  }
 
   componentDidMount(){
     this.fetchWord();
@@ -99,16 +105,21 @@ class App extends Component {
     if(rightguess===false){
       this.imgSwitch();
     }
-    
+    if(!answer.includes("_")){
+      this.gameWin();
+    }
     this.disableLetter(guess,index);
   }
 
   disableLetter(letter,index){
-    const idd = `id` + index;
-    const getId = document.getElementById(idd);
+    const letterId = `id` + index;
+    const getId = document.getElementById(letterId);
     console.log(getId);
     console.log(letter + " from disable " + index);
-    document.getElementById(idd).childNodes[0].disabled = true;
+    document.getElementById(letterId).childNodes[0].disabled = true;
+    document.getElementById(letterId).removeEventListener('click',this.guessLetter,false);
+    
+   
     // console.log(document.getElementById(idd).childNodes.length);
     
   }
